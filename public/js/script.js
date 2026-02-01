@@ -23,12 +23,6 @@ const banner = document.getElementById("banner");
 noBtn.addEventListener("click", () => {
   banner.src = "./public/images/no.gif";
 
-  if (clicks === 0) {
-        banner.src = "public/images/no.gif";
-        refreshBanner();
-    }
-  clicks++;
-
   noIndex = (noIndex + 1) % answers_no[language].length;
   noBtn.textContent = answers_no[language][noIndex];
 

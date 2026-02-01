@@ -65,9 +65,9 @@ function changeLanguage() {
   language = document.getElementById("language-select").value;
 
   document.getElementById("question-heading").textContent =
-    language === "french" ? "Tu veux être mon valentin ? 💕" :
-    language === "thai" ? "เป็นแฟนกับเราไหม 💕" :
-    "Will you be my Valentine? 💕";
+    language === "french" ? "Bonjour Aashu Baby, veux-tu être ma Valentine ? ? 💕" :
+    language === "thai" ? "สวัสดี อาชูที่รัก คุณจะเป็นวาเลนไทน์ของฉันได้ไหม? 💕" :
+    "Hello Aashu Baby, Will you be my Valentine? 💕";
 
   yesBtn.textContent = answers_yes[language];
   noBtn.textContent = answers_no[language][0];

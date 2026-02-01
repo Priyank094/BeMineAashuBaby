@@ -67,8 +67,10 @@ body::after {
 .buttons {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 15px;
     margin-top: 25px;
+    flex-wrap: wrap;
 }
 
 /* YES button */
@@ -166,5 +168,28 @@ body::after {
 
     .banner-gif img {
         height: 180px;
+    }
+}
+
+#yes-button,
+#no-button {
+    max-width: 180px;
+    max-height: 180px;
+    width: 120px;
+    height: 60px;
+    border-radius: 20px;
+}
+
+/* Mobile optimization */
+@media (max-width: 480px) {
+    .buttons {
+        flex-direction: column;
+    }
+
+    #yes-button,
+    #no-button {
+        width: 100%;
+        max-width: 240px;
+        height: 60px;
     }
 }

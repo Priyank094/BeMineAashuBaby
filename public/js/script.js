@@ -1,5 +1,5 @@
-const answers_no = { english: [ "No", "Are you sure?", "Really sure??", "Think again?", "Don’t break my heart 💔", 
-                               "Give me a chance 🥺", "Still no?", "This hurts 😭", "Pleaseee 💕", "Last chance…" ], 
+const answers_no = { english: [ "No", "Are you sure?", "Baby Aisa Kya?😭", "Aashu ji Kaisi ladki hai aap🥺", "Think again?", "Don’t break my heart 💔", 
+                               "Give me a chance 🥺", "Still no?", "This hurts 😭", "Pleaseee 💕", "Last chance…", "Really sure??" ], 
                     french: [ "Non", "Tu es sûr ?", "Vraiment sûr ??", "Réfléchis encore ?", "Ne me brise pas le cœur 💔", 
                              "Donne-moi une chance 🥺", "Toujours non ?", "Ça fait mal 😭", "S’il te plaît 💕", "Dernière chance…" ], 
                     thai: [ "ไม่อ่ะ", "แน่ใจจริงหรอ?", "คิดดีแล้วนะ?", "อย่าใจร้ายสิ 💔", "ขอโอกาสหน่อย 🥺", "ยังไม่เปลี่ยนใจหรอ?", "เราเสียใจนะ 😭", 

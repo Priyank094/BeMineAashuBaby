@@ -45,18 +45,14 @@ noBtn.addEventListener("click", () => {
     noBtn.innerHTML = answers_no[language][noIndex];
 
     // Make YES more irresistible
-   yesSize = Math.min(yesSize + 12, 160); // cap growth
-yesBtn.style.height = yesSize + "px";
-yesBtn.style.width = yesSize + "px";
+    yesSize += 15;
+    yesBtn.style.height = yesSize + "px";
+    yesBtn.style.width = yesSize + "px";
 
     // Make NO dodge a little 😈
-    const container = document.querySelector(".container");
-const rect = container.getBoundingClientRect();
-
-const moveX = Math.random() * 60 - 30;
-const moveY = Math.random() * 30 - 15;
-
-noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    const moveX = Math.random() * 120 - 60;
+    const moveY = Math.random() * 60 - 30;
+    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
 });
 
 /* ---------------- YES BUTTON BEHAVIOR ---------------- */
@@ -105,4 +101,31 @@ function changeLanguage() {
         success.textContent = "Yepppie, à très bientôt :3";
     } else if (language === "thai") {
         heading.textContent = "คืนดีกับเราได้ไหม 💕";
-        success.textContent = "ฮูเร่ คืนดีกันแล้วน
+        success.textContent = "ฮูเร่ คืนดีกันแล้วน้า :3";
+    } else {
+        heading.textContent = "Will you be my Valentine? 💕";
+        success.textContent = "Yepppie, see you sooonnn :3";
+    }
+
+    yesBtn.innerHTML = answers_yes[language];
+    noBtn.innerHTML = answers_no[language][0];
+    noIndex = 0;
+}
+
+/* ---------------- UTILS ---------------- */
+
+function refreshBanner() {
+    const src = banner.src;
+    banner.src = "";
+    banner.src = src;
+}
+
+/* ---------------- HEART ANIMATION CSS INJECT ---------------- */
+
+const style = document.createElement("style");
+style.innerHTML = `
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}`;
+document.head.appendChild(style);

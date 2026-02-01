@@ -29,10 +29,9 @@ noBtn.addEventListener("click", () => {
     }
   clicks++;
 
-  // noIndex = (noIndex + 1) % answers_no[language].length;
-  // noBtn.textContent = answers_no[language][noIndex];
-   // Update text first
+  noIndex = (noIndex + 1) % answers_no[language].length;
   noBtn.textContent = answers_no[language][noIndex];
+  
 
   yesScale += 0.15;
   yesBtn.style.transform = `scale(${yesScale})`;

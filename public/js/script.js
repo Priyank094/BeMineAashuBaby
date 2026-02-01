@@ -32,6 +32,13 @@ noBtn.addEventListener("click", () => {
   const x = Math.random() * 60 - 30;
   const y = Math.random() * 40 - 20;
   noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+  // ✅ Refresh ONLY after full traversal
+  if (noIndex === answers_no[language].length - 1) {
+    setTimeout(() => {
+      refreshBanner();
+    }, 800);
+  }
 });
 
 yesBtn.addEventListener("click", () => {

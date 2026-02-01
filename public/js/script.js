@@ -1,131 +1,75 @@
-/* ---------------- DATA ---------------- */
-
 const answers_no = {
-    english: [
-        "No", "Are you sure?", "Really sure??", "Think again?",
-        "Don’t break my heart 💔", "Give me a chance 🥺",
-        "Still no?", "This hurts 😭", "Pleaseee 💕", "Last chance…"
-    ],
-    french: [
-        "Non", "Tu es sûr ?", "Vraiment sûr ??", "Réfléchis encore ?",
-        "Ne me brise pas le cœur 💔", "Donne-moi une chance 🥺",
-        "Toujours non ?", "Ça fait mal 😭", "S’il te plaît 💕", "Dernière chance…"
-    ],
-    thai: [
-        "ไม่อ่ะ", "แน่ใจจริงหรอ?", "คิดดีแล้วนะ?", "อย่าใจร้ายสิ 💔",
-        "ขอโอกาสหน่อย 🥺", "ยังไม่เปลี่ยนใจหรอ?",
-        "เราเสียใจนะ 😭", "น้าาา 💕", "ขอร้องละ", "ครั้งสุดท้ายแล้ว…"
-    ]
+  english: ["No","Are you sure?","Really sure??","Think again?","Pleaseee 💕"],
+  french: ["Non","Tu es sûr ?","Vraiment ?","Réfléchis","S’il te plaît 💕"],
+  thai: ["ไม่","แน่ใจนะ?","คิดอีกที","ใจร้าย 💔","น้าาา 💕"]
 };
 
 const answers_yes = {
-    english: "YES 💖",
-    french: "OUI 💖",
-    thai: "ตกลง 💖"
+  english: "YES 💖",
+  french: "OUI 💖",
+  thai: "ตกลง 💖"
 };
-
-/* ---------------- STATE ---------------- */
 
 let language = "english";
 let noIndex = 0;
-let yesSize = 50;
+let yesScale = 1;
 
 const noBtn = document.getElementById("no-button");
 const yesBtn = document.getElementById("yes-button");
 const banner = document.getElementById("banner");
 
-/* ---------------- NO BUTTON BEHAVIOR ---------------- */
-
 noBtn.addEventListener("click", () => {
-    banner.src = "public/images/no.gif";
-    refreshBanner();
+  banner.src = "./public/images/no.gif";
 
-    // Change text
-    noIndex = (noIndex + 1) % answers_no[language].length;
-    noBtn.innerHTML = answers_no[language][noIndex];
+  noIndex = (noIndex + 1) % answers_no[language].length;
+  noBtn.textContent = answers_no[language][noIndex];
 
-    // Make YES more irresistible
-    yesSize += 15;
-    yesBtn.style.height = yesSize + "px";
-    yesBtn.style.width = yesSize + "px";
+  yesScale += 0.15;
+  yesBtn.style.transform = `scale(${yesScale})`;
 
-    // Make NO dodge a little 😈
-    const moveX = Math.random() * 120 - 60;
-    const moveY = Math.random() * 60 - 30;
-    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+  const x = Math.random() * 60 - 30;
+  const y = Math.random() * 40 - 20;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
 });
-
-/* ---------------- YES BUTTON BEHAVIOR ---------------- */
 
 yesBtn.addEventListener("click", () => {
-    banner.src = "public/images/yes.gif";
-    refreshBanner();
+  banner.src = "./public/images/yes.gif";
 
-    document.querySelector(".buttons").style.display = "none";
-    document.querySelector(".message").style.display = "block";
+  document.querySelector(".buttons").style.display = "none";
+  document.querySelector(".message").style.display = "block";
 
-    celebrateLove();
+  for (let i = 0; i < 20; i++) createHeart();
 });
 
-/* ---------------- LOVE EFFECTS ---------------- */
-
-function celebrateLove() {
-    for (let i = 0; i < 20; i++) {
-        createHeart();
-    }
-}
-
 function createHeart() {
-    const heart = document.createElement("div");
-    heart.innerHTML = "💖";
-    heart.style.position = "fixed";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.bottom = "-20px";
-    heart.style.fontSize = Math.random() * 20 + 20 + "px";
-    heart.style.animation = "floatUp 3s linear forwards";
-    document.body.appendChild(heart);
-
-    setTimeout(() => heart.remove(), 3000);
+  const heart = document.createElement("div");
+  heart.textContent = "💖";
+  heart.style.position = "fixed";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.bottom = "-20px";
+  heart.style.fontSize = Math.random() * 20 + 20 + "px";
+  heart.style.animation = "floatUp 3s linear forwards";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 3000);
 }
-
-/* ---------------- LANGUAGE SWITCH ---------------- */
 
 function changeLanguage() {
-    language = document.getElementById("language-select").value;
+  language = document.getElementById("language-select").value;
 
-    const heading = document.getElementById("question-heading");
-    const success = document.getElementById("success-message");
+  document.getElementById("question-heading").textContent =
+    language === "french" ? "Tu veux être mon valentin ? 💕" :
+    language === "thai" ? "เป็นแฟนกับเราไหม 💕" :
+    "Will you be my Valentine? 💕";
 
-    if (language === "french") {
-        heading.textContent = "Tu veux être mon valentin ? 💕";
-        success.textContent = "Yepppie, à très bientôt :3";
-    } else if (language === "thai") {
-        heading.textContent = "คืนดีกับเราได้ไหม 💕";
-        success.textContent = "ฮูเร่ คืนดีกันแล้วน้า :3";
-    } else {
-        heading.textContent = "Will you be my Valentine? 💕";
-        success.textContent = "Yepppie, see you sooonnn :3";
-    }
-
-    yesBtn.innerHTML = answers_yes[language];
-    noBtn.innerHTML = answers_no[language][0];
-    noIndex = 0;
+  yesBtn.textContent = answers_yes[language];
+  noBtn.textContent = answers_no[language][0];
+  noIndex = 0;
 }
-
-/* ---------------- UTILS ---------------- */
-
-function refreshBanner() {
-    const src = banner.src;
-    banner.src = "";
-    banner.src = src;
-}
-
-/* ---------------- HEART ANIMATION CSS INJECT ---------------- */
 
 const style = document.createElement("style");
 style.innerHTML = `
 @keyframes floatUp {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-100vh); opacity: 0; }
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-100vh); opacity: 0; }
 }`;
 document.head.appendChild(style);

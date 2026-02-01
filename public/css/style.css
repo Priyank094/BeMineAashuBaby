@@ -1,197 +1,131 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+/* ---------------- DATA ---------------- */
 
-* {
-    box-sizing: border-box;
-}
+const answers_no = {
+    english: [
+        "No", "Are you sure?", "Really sure??", "Think again?",
+        "Don’t break my heart 💔", "Give me a chance 🥺",
+        "Still no?", "This hurts 😭", "Pleaseee 💕", "Last chance…"
+    ],
+    french: [
+        "Non", "Tu es sûr ?", "Vraiment sûr ??", "Réfléchis encore ?",
+        "Ne me brise pas le cœur 💔", "Donne-moi une chance 🥺",
+        "Toujours non ?", "Ça fait mal 😭", "S’il te plaît 💕", "Dernière chance…"
+    ],
+    thai: [
+        "ไม่อ่ะ", "แน่ใจจริงหรอ?", "คิดดีแล้วนะ?", "อย่าใจร้ายสิ 💔",
+        "ขอโอกาสหน่อย 🥺", "ยังไม่เปลี่ยนใจหรอ?",
+        "เราเสียใจนะ 😭", "น้าาา 💕", "ขอร้องละ", "ครั้งสุดท้ายแล้ว…"
+    ]
+};
 
-body {
-    min-height: 100vh;
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
+const answers_yes = {
+    english: "YES 💖",
+    french: "OUI 💖",
+    thai: "ตกลง 💖"
+};
 
-/* Floating hearts background */
-body::before,
-body::after {
-    content: "❤";
-    position: absolute;
-    font-size: 22px;
-    opacity: 0.2;
-    animation: float 12s infinite linear;
-}
+/* ---------------- STATE ---------------- */
 
-body::after {
-    left: 70%;
-    animation-duration: 16s;
-}
+let language = "english";
+let noIndex = 0;
+let yesSize = 50;
 
-@keyframes float {
-    0% { transform: translateY(100vh) scale(1); }
-    100% { transform: translateY(-10vh) scale(1.5); }
-}
+const noBtn = document.getElementById("no-button");
+const yesBtn = document.getElementById("yes-button");
+const banner = document.getElementById("banner");
 
-/* Main card */
-.container {
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(14px);
-    border-radius: 22px;
-    padding: 28px 22px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    max-width: 420px;
-    width: 100%;
-    max-height: 90vh;
-    overflow: hidden;
-    z-index: 1;
-}
+/* ---------------- NO BUTTON BEHAVIOR ---------------- */
 
-/* Banner */
-.banner-gif img {
-    height: 200px;
-    max-width: 100%;
-    border-radius: 16px;
-}
+noBtn.addEventListener("click", () => {
+    banner.src = "public/images/no.gif";
+    refreshBanner();
 
-/* Heading */
-#question-heading {
-    margin-top: 18px;
-    font-size: 1.35rem;
-    color: #fff;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    line-height: 1.4;
-}
+    // Change text
+    noIndex = (noIndex + 1) % answers_no[language].length;
+    noBtn.innerHTML = answers_no[language][noIndex];
 
-/* Buttons container */
-.buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 14px;
-    margin-top: 24px;
-    flex-wrap: wrap;
-}
+    // Make YES more irresistible
+    yesSize += 15;
+    yesBtn.style.height = yesSize + "px";
+    yesBtn.style.width = yesSize + "px";
 
-/* Buttons base */
-#yes-button,
-#no-button {
-    width: 140px;
-    height: 60px;
-    max-width: 180px;
-    max-height: 160px;
-    border-radius: 18px;
-    font-size: 1rem;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    // Make NO dodge a little 😈
+    const moveX = Math.random() * 120 - 60;
+    const moveY = Math.random() * 60 - 30;
+    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+});
 
-/* YES button */
-#yes-button {
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
-    color: #fff;
-    box-shadow: 0 0 18px rgba(255,75,43,0.6);
-}
+/* ---------------- YES BUTTON BEHAVIOR ---------------- */
 
-#yes-button:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 28px rgba(255,75,43,0.9);
-}
+yesBtn.addEventListener("click", () => {
+    banner.src = "public/images/yes.gif";
+    refreshBanner();
 
-/* NO button */
-#no-button {
-    background: #555;
-    color: #fff;
-}
+    document.querySelector(".buttons").style.display = "none";
+    document.querySelector(".message").style.display = "block";
 
-#no-button:hover {
-    transform: translateX(4px);
-}
+    celebrateLove();
+});
 
-/* Remove p margins inside buttons */
-#yes-button p,
-#no-button p {
-    margin: 0;
-}
+/* ---------------- LOVE EFFECTS ---------------- */
 
-/* Success message */
-.message {
-    display: none;
-    margin-top: 22px;
-}
-
-.message h2 {
-    color: #fff;
-    font-weight: 500;
-    animation: pop 0.6s ease;
-}
-
-@keyframes pop {
-    0% { transform: scale(0.7); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-/* Language selector */
-.language-selector {
-    margin-top: 22px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    color: #fff;
-    font-size: 0.9rem;
-}
-
-.language-selector select {
-    padding: 6px 10px;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-}
-
-/* Creator link */
-.creator {
-    color: #fff;
-    text-decoration: none;
-    opacity: 0.8;
-}
-
-.creator:hover {
-    text-decoration: underline;
-    opacity: 1;
-}
-
-/* MOBILE OPTIMIZATION */
-@media (max-width: 480px) {
-    .container {
-        padding: 22px 18px;
-        max-height: 95vh;
-    }
-
-    #question-heading {
-        font-size: 1.2rem;
-    }
-
-    .banner-gif img {
-        height: 170px;
-    }
-
-    .buttons {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    #yes-button,
-    #no-button {
-        width: 100%;
-        max-width: 240px;
-        height: 56px;
+function celebrateLove() {
+    for (let i = 0; i < 20; i++) {
+        createHeart();
     }
 }
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.innerHTML = "💖";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.bottom = "-20px";
+    heart.style.fontSize = Math.random() * 20 + 20 + "px";
+    heart.style.animation = "floatUp 3s linear forwards";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 3000);
+}
+
+/* ---------------- LANGUAGE SWITCH ---------------- */
+
+function changeLanguage() {
+    language = document.getElementById("language-select").value;
+
+    const heading = document.getElementById("question-heading");
+    const success = document.getElementById("success-message");
+
+    if (language === "french") {
+        heading.textContent = "Tu veux être mon valentin ? 💕";
+        success.textContent = "Yepppie, à très bientôt :3";
+    } else if (language === "thai") {
+        heading.textContent = "คืนดีกับเราได้ไหม 💕";
+        success.textContent = "ฮูเร่ คืนดีกันแล้วน้า :3";
+    } else {
+        heading.textContent = "Will you be my Valentine? 💕";
+        success.textContent = "Yepppie, see you sooonnn :3";
+    }
+
+    yesBtn.innerHTML = answers_yes[language];
+    noBtn.innerHTML = answers_no[language][0];
+    noIndex = 0;
+}
+
+/* ---------------- UTILS ---------------- */
+
+function refreshBanner() {
+    const src = banner.src;
+    banner.src = "";
+    banner.src = src;
+}
+
+/* ---------------- HEART ANIMATION CSS INJECT ---------------- */
+
+const style = document.createElement("style");
+style.innerHTML = `
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}`;
+document.head.appendChild(style);

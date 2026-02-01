@@ -28,7 +28,7 @@ noBtn.addEventListener("click", () => {
     noBtn.textContent = answers_no[language][noIndex];
 
     setTimeout(() => {
-      alert("Okay okay 😭 you’ve said NO enough times a!");
+      alert("Alright, you win 😌 But love doesn’t give up that easily 💕 Let’s rewind time and try once more?");
       window.location.href = window.location.href; // ✅ FORCE reload
     }, 300);
 

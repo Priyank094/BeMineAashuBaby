@@ -1,8 +1,9 @@
-const answers_no = {
-  english: ["No","Are you sure?","Really sure??","Think again?","Pleaseee 💕"],
-  french: ["Non","Tu es sûr ?","Vraiment ?","Réfléchis","S’il te plaît 💕"],
-  thai: ["ไม่","แน่ใจนะ?","คิดอีกที","ใจร้าย 💔","น้าาา 💕"]
-};
+const answers_no = { english: [ "No", "Are you sure?", "Really sure??", "Think again?", "Don’t break my heart 💔", 
+                               "Give me a chance 🥺", "Still no?", "This hurts 😭", "Pleaseee 💕", "Last chance…" ], 
+                    french: [ "Non", "Tu es sûr ?", "Vraiment sûr ??", "Réfléchis encore ?", "Ne me brise pas le cœur 💔", 
+                             "Donne-moi une chance 🥺", "Toujours non ?", "Ça fait mal 😭", "S’il te plaît 💕", "Dernière chance…" ], 
+                    thai: [ "ไม่อ่ะ", "แน่ใจจริงหรอ?", "คิดดีแล้วนะ?", "อย่าใจร้ายสิ 💔", "ขอโอกาสหน่อย 🥺", "ยังไม่เปลี่ยนใจหรอ?", "เราเสียใจนะ 😭", 
+                           "น้าาา 💕", "ขอร้องละ", "ครั้งสุดท้ายแล้ว…" ] };
 
 const answers_yes = {
   english: "YES 💖",

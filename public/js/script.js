@@ -45,14 +45,18 @@ noBtn.addEventListener("click", () => {
     noBtn.innerHTML = answers_no[language][noIndex];
 
     // Make YES more irresistible
-    yesSize += 15;
-    yesBtn.style.height = yesSize + "px";
-    yesBtn.style.width = yesSize + "px";
+   yesSize = Math.min(yesSize + 12, 160); // cap growth
+yesBtn.style.height = yesSize + "px";
+yesBtn.style.width = yesSize + "px";
 
     // Make NO dodge a little 😈
-    const moveX = Math.random() * 120 - 60;
-    const moveY = Math.random() * 60 - 30;
-    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    const container = document.querySelector(".container");
+const rect = container.getBoundingClientRect();
+
+const moveX = Math.random() * 60 - 30;
+const moveY = Math.random() * 30 - 15;
+
+noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
 });
 
 /* ---------------- YES BUTTON BEHAVIOR ---------------- */

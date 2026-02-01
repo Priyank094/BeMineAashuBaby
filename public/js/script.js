@@ -23,6 +23,18 @@ const banner = document.getElementById("banner");
 noBtn.addEventListener("click", () => {
   banner.src = "./public/images/no.gif";
 
+  // If LAST option is reached
+  if (noIndex === answers_no[language].length - 1) {
+    noBtn.textContent = answers_no[language][noIndex];
+
+    setTimeout(() => {
+      alert("Okay okay 😭 you’ve said NO enough times a!");
+      window.location.href = window.location.href; // ✅ FORCE reload
+    }, 300);
+
+    return; // ⛔ stop execution
+  }
+
   noIndex = (noIndex + 1) % answers_no[language].length;
   noBtn.textContent = answers_no[language][noIndex];
 
@@ -34,12 +46,6 @@ noBtn.addEventListener("click", () => {
   noBtn.style.transform = `translate(${x}px, ${y}px)`;
 
   // ✅ Refresh ONLY after full traversal
-  if (noIndex === answers_no[language].length - 1) {
-    setTimeout(() => {
-      alert("Okay okay 😭 you’ve said NO enough times!");
-      location.reload(); // or location.reload()
-    }, 100);
-  }
 });
 
 function refreshBanner() {

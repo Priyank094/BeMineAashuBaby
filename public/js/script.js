@@ -14,6 +14,7 @@ const answers_yes = {
 let language = "english";
 let noIndex = 0;
 let yesScale = 1;
+let clicks = 0;
 
 const noBtn = document.getElementById("no-button");
 const yesBtn = document.getElementById("yes-button");
@@ -21,6 +22,12 @@ const banner = document.getElementById("banner");
 
 noBtn.addEventListener("click", () => {
   banner.src = "./public/images/no.gif";
+
+  if (clicks === 0) {
+        banner.src = "public/images/no.gif";
+        refreshBanner();
+    }
+  clicks++;
 
   noIndex = (noIndex + 1) % answers_no[language].length;
   noBtn.textContent = answers_no[language][noIndex];

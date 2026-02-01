@@ -37,8 +37,8 @@ noBtn.addEventListener("click", () => {
   if (noIndex === answers_no[language].length - 1) {
     setTimeout(() => {
       alert("Okay okay 😭 you’ve said NO enough times!");
-      refreshBanner(); // or location.reload()
-    }, 300);
+      location.reload(); // or location.reload()
+    }, 100);
   }
 });
 

@@ -36,8 +36,9 @@ noBtn.addEventListener("click", () => {
   // ✅ Refresh ONLY after full traversal
   if (noIndex === answers_no[language].length - 1) {
     setTimeout(() => {
-      refreshBanner();
-    }, 800);
+      alert("Okay okay 😭 you’ve said NO enough times!");
+      refreshBanner(); // or location.reload()
+    }, 300);
   }
 });
 
